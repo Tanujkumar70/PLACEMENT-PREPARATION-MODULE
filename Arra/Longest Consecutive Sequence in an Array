@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int longConsecutive(vector<int>nums){
+    if(nums.size()==0){
+        return 0;
+    }
+    sort(nums.begin(),nums.end());
+    int ans=1;
+    int pre=nums[0];
+    int cur=1;
+    for(int i=1;i<nums.size();i++)
+{
+  if(nums[i]==pre+1){
+      cur++;
+  }else if(nums[i]!=pre){
+      cur=1;
+  }
+  pre=nums[i];
+  ans=max(ans,cur);
+  
+    
+}
+return ans;
+    
+}
+int main()
+{
+    std::vector<int>arr{100,200,1,2,3,4};
+    int lon=longConsecutive(arr);
+    cout<<lon;
+}
