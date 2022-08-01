@@ -1,0 +1,29 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    string getPermutation(int n, int k) {
+       string s="";
+        string ans=""; //char ch='1';
+                      //  int x = ch;  ,,ascii value of 0 is 48
+        int sob=1;  //size of block
+        for(int i=1;i<=n;i++)
+        {
+            s+=to_string(i);
+            sob*=i;
+        }        
+        while(n!=0)
+        {
+            sob/=n;
+            int index=k/sob;
+            if(k%sob==0) index-=1;
+            ans+=s[index];
+            s.erase(s.begin()+index);
+            k-=sob*index;
+            n--;
+        }
+        return ans;
+    }
+};
+  
