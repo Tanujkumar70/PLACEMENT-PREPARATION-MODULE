@@ -1,0 +1,36 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    
+
+bool ispalin(string &s){
+        int n=s.length();
+        for(int i=0; i<=n/2; i++)
+            if(s[i]!=s[n-i-1])
+                return false;
+        return true;
+    }
+    void make_partition(int idx, vector<string> &temp, vector<vector<string>> &ans, string &s){
+        if(idx==s.length()){
+            ans.push_back(temp);
+            return;
+        }
+        string meow="";
+        for(int i=idx; i<s.length(); i++){
+            meow+=s[i];
+            if(ispalin(meow)){// if s[idx ..... i] is valid
+                temp.push_back(meow);
+                make_partition(i+1, temp, ans, s);
+                temp.pop_back();
+            }
+        }
+    }
+    vector<vector<string>> partition(string s) {
+        vector<vector<string>> ans;
+        vector<string> temp;
+        make_partition(0, temp, ans, s);
+        return ans;
+    }
+    };
