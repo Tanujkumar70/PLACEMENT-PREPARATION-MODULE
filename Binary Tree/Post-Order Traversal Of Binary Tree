@@ -1,0 +1,22 @@
+#include<bits/stdc++.h>
+using name space std;
+
+class Solution {
+public:
+
+	vector<int> ans;
+	void solve(TreeNode* root){
+		if(!root)
+			return;
+
+
+		solve(root->left);
+		solve(root->right);
+		ans.push_back(root->val);
+	}
+
+	vector<int> postorderTraversal(TreeNode* root) {
+		solve(root);
+		return ans;
+	}
+};
