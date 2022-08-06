@@ -1,0 +1,26 @@
+class Solution {
+public:
+    TreeNode* rec(int left,int right,vector<int>& preorder)
+    {
+        if(left<=right)
+        {
+        TreeNode* curr=new TreeNode(preorder[left]);
+        int i;
+        for(i=left+1;i<=right;i++)
+        {
+            if(preorder[i]>preorder[left])
+            {
+                break;
+            }
+        }
+        curr->left=rec(left+1,i-1,preorder);
+        curr->right=rec(i,right,preorder);
+        return curr;
+        }
+        else
+            return NULL;
+    }
+    TreeNode* bstFromPreorder(vector<int>& preorder) {
+        return rec(0,preorder.size()-1,preorder);
+    }
+};
