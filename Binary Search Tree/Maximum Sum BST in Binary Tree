@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int ans=0;
+  
+    vector<int> dfs(TreeNode* root){
+        if(!root) // if nullptr
+            return {0,INT_MAX,INT_MIN,true}; 
+        vector<int>left=dfs(root->left); 
+        vector<int>right=dfs(root->right);
+        
+      
+        if(left[3] && right[3] && left[2]<root->val && right[1]>root->val){
+            int sum=left[0]+right[0]+root->val;
+            ans=max(sum,ans);
+           
+            return {sum,left[1]==INT_MAX?root->val:left[1],right[2]==INT_MIN?root->val:right[2],true};
+        }
+        return {0,INT_MIN,INT_MAX,false};
+    }
+    int maxSumBST(TreeNode* root) {
+        dfs(root);
+        return ans;
+    }
+};
